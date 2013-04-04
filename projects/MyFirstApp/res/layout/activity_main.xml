@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+   <!-- tools:context=".MainActivity" -->
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="top|left"
+        android:hint="@string/edit_message" />
+	
+	<Button
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="@string/btn_send"
+    	android:onClick="sendMessage" />
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+
+		<Button
+		    android:id="@+id/btn_pick_contact"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:onClick="pickContact"
+		    android:text="@string/btn_contact" />
+	
+		<Button
+		    android:id="@+id/btn_start_dialog"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@+id/btn_pick_contact"
+		    android:onClick="startDialog"
+		    android:text="@string/btn_start_dialog" />
+
+		<Button
+		    android:id="@+id/btn_set_date"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@+id/btn_start_dialog"
+		    android:onClick="showDatePickerDialog"
+		    android:text="@string/btn_date" />
+				
+		<Button
+		    android:id="@+id/btn_set_time"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@+id/btn_set_date"
+		    android:onClick="showTimePickerDialog"
+		    android:text="@string/btn_time" />
+
+	    <EditText
+	        android:id="@+id/txt_date"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/btn_pick_contact"
+	        android:layout_alignParentLeft="true" 
+	        android:inputType="date" >
+	    </EditText>
+	
+	    <EditText
+	        android:id="@+id/txt_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/btn_set_time"
+	        android:layout_alignParentRight="true"
+	        android:inputType="time" />
+				
+	</RelativeLayout>
+	
+</LinearLayout>

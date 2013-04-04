@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:onClick="onMenuSettingsClick"
+        android:title="@string/menu_settings"/>
+            
+	<item
+        android:id="@+id/menu_view"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:onClick="onMenuViewClick"
+        android:title="@string/menu_view"/>
+
+	<item
+        android:id="@+id/menu_help"
+        android:orderInCategory="300"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_help"
+        android:onClick="onMenuViewClick"
+        android:title="@string/menu_help"/>
+		
+</menu>

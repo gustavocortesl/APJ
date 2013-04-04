@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My First App</string>
+    <string name="hello_world">Tirso ¡¡¡QUE PESAO ERES!!!</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_contact">Contact</string>
+	<string name="btn_date">Set Date</string>
+    <string name="btn_time">Set Time</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="dialog_text">Simple Dialog</string>
+    <string name="btn_start_dialog">Dialog</string>	
+	<string name="btn_finish_dialog">Close</string>
+
+	<string name="menu_settings"><b>S</b>ettings</string>
+	<string name="menu_view"><b>V</b>iew</string>
+	<string name="menu_help"><b>H</b>elp</string>
+	
+	<string name="ctx_create"><b>C</b>reate</string>
+	<string name="ctx_open"><b>O</b>pen</string>
+	
+	<string name="title_activity_settings">Ajustes</string>
+		
+</resources>
