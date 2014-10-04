@@ -6,17 +6,22 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.app.DialogFragment;
+import android.provider.ContactsContract.Data;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +31,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class MainActivity extends FragmentActivity {
 
 	public final static String EXTRA_MESSAGE = "com.gacl.myfirstapp.MESSAGE";
@@ -137,6 +142,25 @@ public class MainActivity extends FragmentActivity {
     	startActivity(intent);
     }
     
+    /** Called when the user clicks the Event button */
+    public void insertEvent(View view) {
+	    Calendar beginTime = Calendar.getInstance();
+	    beginTime.set(2013, 3, 25, 9, 45);
+	    Calendar endTime = Calendar.getInstance();
+	    endTime.set(2013, 3, 25, 14, 00);
+	    Intent intent = new Intent(Intent.ACTION_INSERT)
+	            .setData(Events.CONTENT_URI)
+	            .putExtra(CalendarContract.EXTRA_CUSTOM_APP_URI, CalendarContract.ACCOUNT_TYPE_LOCAL)
+	            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+	            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+	            .putExtra(Events.TITLE, "Tourneé por Ronda")
+	            .putExtra(Events.DESCRIPTION, "Boss and company")
+	            .putExtra(Events.EVENT_LOCATION, "The office")
+	            .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+	            .putExtra(Intent.EXTRA_EMAIL, "gustavocortesl@gmail.com,gustavo_cortes@hotmail.com");
+	    startActivity(intent);
+    }
+    
     /** Called when the user clicks the Contact button */
     public void pickContact(View view) {
         // Create an intent to "pick" a contact, as defined by the content provider URI
@@ -148,22 +172,32 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If the request went well (OK) and the request was PICK_CONTACT_REQUEST
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_CONTACT_REQUEST) {
-            // Perform a query to the contact's content provider for the contact's name     	
+            // Perform a query to the contact's content provider for the contact's name
+        	Log.d("CAGADA", "_ID = " + data.getData().getLastPathSegment());
+        	
         	try {
-	        	Cursor cursor = getContentResolver().query(data.getData(),
-	        		new String[] {Contacts.DISPLAY_NAME, Contacts.HAS_PHONE_NUMBER}, null, null, null);        	
+           	 	Cursor cursor = getContentResolver().query(Data.CONTENT_URI,
+       	          new String[] {Data._ID,Data.DISPLAY_NAME,Phone.NUMBER,Data.CONTACT_ID,Phone.TYPE, Phone.LABEL},
+       	          Data._ID + "=? AND " + Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "'",
+       	          new String[] {"" + data.getData().getLastPathSegment()}, 
+       	          Data.DISPLAY_NAME);
+           	 Log.d("CAGADA", "Count: " + cursor.getCount());
+        		//Cursor cursor = getContentResolver().query(data.getData(),
+	        	//	new String[] {Contacts.DISPLAY_NAME, Contacts.HAS_PHONE_NUMBER}, null, null, null);        	
 	        	if (cursor.moveToFirst()) { // True if the cursor is not empty
 	                int columnIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
 	                String name = cursor.getString(columnIndex);
-	                columnIndex = cursor.getColumnIndex(Contacts.HAS_PHONE_NUMBER);
+	                //columnIndex = cursor.getColumnIndex(Contacts.HAS_PHONE_NUMBER);
+	                columnIndex = cursor.getColumnIndex(Phone.NUMBER);
 	                String phone = cursor.getString(columnIndex);
 	                // Do something with the selected contact's name...
 	            	Intent intent = new Intent(this, DisplayMessageActivity.class);
 	            	intent.putExtra(EXTRA_MESSAGE, name + " " + phone);
 	            	startActivity(intent);
 	        	}
-            }
+            }        	
         	catch (Exception e) {
+        		e.printStackTrace();
 				Toast.makeText(this, "algo ha petado de mala manera...", Toast.LENGTH_LONG).show();					
 			}        	
         }

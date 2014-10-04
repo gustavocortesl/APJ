@@ -5,6 +5,7 @@
     <string name="hello_world">Tirso ¡¡¡QUE PESAO ERES!!!</string>
     <string name="edit_message">Enter a message</string>
     <string name="btn_send">Send</string>
+    <string name="btn_event">Event</string>
     <string name="btn_contact">Contact</string>
 	<string name="btn_date">Set Date</string>
     <string name="btn_time">Set Time</string>

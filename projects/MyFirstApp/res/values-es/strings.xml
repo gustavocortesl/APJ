@@ -5,6 +5,7 @@
     <string name="hello_world">Tirso ¡¡¡QUE PESAO ERES!!!</string>
     <string name="edit_message">Introduce un mensaje</string>
     <string name="btn_send"><b>E</b>nviar</string>
+    <string name="btn_event">E<b>v</b>ento</string>
     <string name="btn_contact"><b>C</b>ontacto</string>
 	<string name="btn_date"><b>F</b>echa</string>
     <string name="btn_time"><b>H</b>ora</string>
